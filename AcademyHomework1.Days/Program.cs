@@ -14,7 +14,6 @@
                 Console.WriteLine("Do you want to continue Y/N");
                 string testY = Console.ReadLine();
                 isContinue = (bool)(testY == "y" || testY == "Y");
-
             } 
             while (isContinue);
         }
