@@ -10,13 +10,13 @@
                 Console.Clear();
                 var isNumberDay = SelectNumber();
                 CheckOfTheDay(isNumberDay);
-
-                               
+                                             
                 Console.WriteLine("Do you want to continue Y/N");
                 string testY = Console.ReadLine();
                 isContinue = (bool)(testY == "y" || testY == "Y");
 
-            } while (isContinue);
+            } 
+            while (isContinue);
         }
 
         static int SelectNumber()
@@ -33,7 +33,6 @@
             {
                 return 8;
             }
-             
             return 0;
         }
 
