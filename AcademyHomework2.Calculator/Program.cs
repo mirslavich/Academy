@@ -18,18 +18,18 @@
             switch (Console.ReadLine ())
             {
                 case "+":
-                    AdditionNumbers(GetFirstNumbers(), GetSecondNumbers());
+                    AdditionNumbers(InputNumber(), InputNumber());
                     break;
                 case "-":
-                    SubtractionNumbers(GetFirstNumbers(), GetSecondNumbers());
+                    SubtractionNumbers(InputNumber(), InputNumber());
                     break;
                 case "*":
-                    MultiplicationNumbers(GetFirstNumbers(), GetSecondNumbers());
+                    MultiplicationNumbers(InputNumber(), InputNumber());
                     break;
                 case "/":
                     {
-                        var firstNumber = GetFirstNumbers();
-                        var secondNumber = GetSecondNumbers();
+                        var firstNumber = InputNumber();
+                        var secondNumber = InputNumber();
                         if (secondNumber == 0)
                         {
                             Console.WriteLine("This is a rhetorical question!");
@@ -41,8 +41,8 @@
                     }
                     break;
                 case "^":
-                    {   var firstNumber=GetFirstNumbers();
-                        var secondNumber= GetSecondNumbers();
+                    {   var firstNumber=InputNumber();
+                        var secondNumber= InputNumber();
                         var result = Math.Pow(firstNumber, secondNumber);
                         Console.WriteLine($"Result: \nResult: {firstNumber}^{secondNumber}={result}");
                     }
@@ -50,7 +50,7 @@
                 case "F":
                 case "f":
                     {
-                        var someNumber = GetFirstNumbers();
+                        var someNumber = InputNumber();
                         if (someNumber % 1 == 0 && someNumber >= 0 && someNumber <= 65)
                         {
                             ulong someNumberInt = (ulong)someNumber;
@@ -81,13 +81,13 @@
                 GeneralFunction();
             }
         }
-        static double GetFirstNumbers()
+        static double InputNumber()
         {
             double firstNumber;
             bool check;
             do
             {
-                Console.WriteLine("Enter first a number");
+                Console.WriteLine("Enter the number");
                 check = double.TryParse(Console.ReadLine(), out firstNumber);
                 if (!check)
                 {
@@ -97,23 +97,7 @@
             while (!check);
             return firstNumber;
         }
-        static double GetSecondNumbers()
-        {
-            double secondNumber;
-            bool check;
-            do
-            {
-                Console.WriteLine("Enter second a number");
-                check = double.TryParse(Console.ReadLine(), out secondNumber);
-                if (!check)
-                {
-                    Console.WriteLine("Your input is wrong");
-                }
-
-            }
-            while (!check);
-            return secondNumber;
-        }
+        
         static void AdditionNumbers(double firstNumbers, double secondNumbers) //+
         {
             var result = firstNumbers + secondNumbers;
