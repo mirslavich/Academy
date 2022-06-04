@@ -11,9 +11,9 @@
 
                 Console.WriteLine("Hello, I am multiplication table");
                 Console.WriteLine("Enter first number");
-                int firstNumber = inputNumber();
+                int firstNumber = InputNumber();
                 Console.WriteLine("Enter second number");
-                int secondNumber = inputNumber();
+                int secondNumber = InputNumber();
                 Multiplication (firstNumber, secondNumber);
 
                 Console.WriteLine("\n Do you want to continue Y/N");
@@ -22,7 +22,7 @@
 
             } while (isContinue);
             
-            static int inputNumber()
+            static int InputNumber()
             {
                 bool Check = false;
                 int firstNumber;
