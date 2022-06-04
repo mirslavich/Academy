@@ -13,7 +13,7 @@
 
         static void GeneralFunction()
         {   
-            Console.WriteLine("Please enter operation '+' '-' '*' '/' '^' 'F'");
+            Console.WriteLine("Please enter operation \n'+' \n'-' \n'*' \n'/' \n'^' \n'!'-this is the factorial");
 
             switch (Console.ReadLine ())
             {
@@ -47,8 +47,7 @@
                         Console.WriteLine($"Result: \nResult: {firstNumber}^{secondNumber}={result}");
                     }
                     break;
-                case "F":
-                case "f":
+                case "!":
                     {
                         var someNumber = InputNumber();
                         if (someNumber % 1 == 0 && someNumber >= 0 && someNumber <= 65)
