@@ -5,10 +5,8 @@
         static void Main(string[] args)
         {
             //  + - * / ^ F
-            
             Console.WriteLine("Hello, I am calculator");
             GeneralFunction();
-            
         }
 
         static void GeneralFunction()
@@ -18,13 +16,19 @@
             switch (Console.ReadLine ())
             {
                 case "+":
-                    AdditionNumbers(InputNumber(), InputNumber());
+                    {
+                        AdditionNumbers(InputNumber(), InputNumber());
+                    }
                     break;
                 case "-":
-                    SubtractionNumbers(InputNumber(), InputNumber());
+                    {
+                        SubtractionNumbers(InputNumber(), InputNumber());
+                    }
                     break;
                 case "*":
-                    MultiplicationNumbers(InputNumber(), InputNumber());
+                    {
+                        MultiplicationNumbers(InputNumber(), InputNumber());
+                    }
                     break;
                 case "/":
                     {
@@ -41,7 +45,8 @@
                     }
                     break;
                 case "^":
-                    {   var firstNumber=InputNumber();
+                    {   
+                        var firstNumber=InputNumber();
                         var secondNumber= InputNumber();
                         var result = Math.Pow(firstNumber, secondNumber);
                         Console.WriteLine($"Result: \nResult: {firstNumber}^{secondNumber}={result}");
@@ -96,7 +101,6 @@
             while (!check);
             return firstNumber;
         }
-        
         static void AdditionNumbers(double firstNumbers, double secondNumbers) //+
         {
             var result = firstNumbers + secondNumbers;
@@ -117,7 +121,6 @@
             var result = firstNumbers / secondNumbers;
             Console.WriteLine($"\nResult: {firstNumbers}/{secondNumbers}={result}");
         }
-        
         static ulong FactorialNumbers(ulong  someNumbers) // n!
         {
             ulong result=1;
@@ -127,15 +130,6 @@
             }
             return result;
         }
-
-        
-
-        
-
-        
-
-
-
     }
 }
 
