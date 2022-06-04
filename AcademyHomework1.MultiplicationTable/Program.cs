@@ -10,8 +10,10 @@
                 Console.Clear();
 
                 Console.WriteLine("Hello, I am multiplication table");
-                int firstNumber = inputFirstNumber();
-                int secondNumber = inputSecondNumber();
+                Console.WriteLine("Enter first number");
+                int firstNumber = inputNumber();
+                Console.WriteLine("Enter second number");
+                int secondNumber = inputNumber();
                 Multiplication (firstNumber, secondNumber);
 
                 Console.WriteLine("\n Do you want to continue Y/N");
@@ -20,15 +22,13 @@
 
             } while (isContinue);
             
-            static int inputFirstNumber()
+            static int inputNumber()
             {
                 bool Check = false;
                 int firstNumber;
 
                 do
                 {
-                    Console.WriteLine("Enter first number");
-
                     Check = int.TryParse(Console.ReadLine(), out firstNumber);
                     if (!Check)
                     {
@@ -38,26 +38,6 @@
                 while (!Check);
                 return firstNumber;
             }
-
-            static int inputSecondNumber()
-            {
-                bool Check = false;
-                int secondNumber;
-
-                do
-                {
-                    Console.WriteLine("Enter second number");
-
-                    Check = int.TryParse(Console.ReadLine(), out secondNumber);
-                    if (!Check)
-                    {
-                        Console.WriteLine("Your input is wrong");
-                    }
-                } 
-                while (!Check);
-                return secondNumber;
-            }
-
             static void Multiplication (int firstNumber,int secondNumber)
             {
                 Console.WriteLine("\n Multiplication table");
