@@ -7,51 +7,73 @@
         static public void Main()
         {
             ////////////  PART 1 ARRAY
-            string something = "12.5678+15/16(-16+23)";
-            
-            string[] operationStack=  new string[something.Length];
-            string[] numbersStack= new string[something.Length];
+            //string something = "1+2*3/6+7*2+1*2/2*1+35-19"; //33
+            string something = "(1+2)*3/6+7+17*2*(3+8)"; //16
+            //string something = "1+2*3/6+7*2";
+            //string something = "1+2*3/6+7*2+17*2"; //49
 
+            string[] operationStack=  new string[something.Length];
+            double[] numbersStack= new double[something.Length];
             string[] getStringArray = GetStringArray(something);
 
 
-            //CheckParentheses(secondArrayGet);
-
-
-
+            //CheckParentheses(secondArrayGet); 
 
             ////////////////// PART 2 
 
-            var n = 0;
-            var op = 0;
-            var result = 0;
-            for (int i = 0; i <getStringArray.Length; i++)
-            {
-                
+            var countNumber = 0;
+            var countOperation = 0;
 
+            for (int i = 0; i < getStringArray.Length;i++ )
+            {
                 if (!CheckIfIsOperationString(getStringArray[i]))
-                {   
-                    numbersStack[n]=getStringArray[i];
-                    n++;
-                }
-                else
-                    
                 {
-                    if (CheckPriorityOperation(getStringArray[i]) > CheckPriorityOperation(operationStack[op]))
+                    numbersStack[countNumber] = double.Parse(getStringArray[i]);
+                    countNumber++;
+                }
+                else if (CheckIfIsOperationString(getStringArray[i]))
+                {
+                    if (countOperation == 0 || getStringArray[i].ToCharArray()[0] == '(' || CheckPriorityOperation(getStringArray[i]) > CheckPriorityOperation(operationStack[countOperation - 1]))   
                     {
-                        operationStack[op] = getStringArray[i];
-                        op++;
+                        operationStack[countOperation] = getStringArray[i];
+                        countOperation++;
+                    }
+                    
+                    else if (getStringArray[i].ToCharArray()[0] == ')')
+                    {
+                        do
+                        {
+                            countNumber--;
+                            numbersStack[countNumber - 1] = IsResultOperation(operationStack[countOperation - 1], numbersStack[countNumber - 1], numbersStack[countNumber]);
+                            countOperation--;
+
+                        } while (operationStack[countOperation].ToCharArray()[0] == '(');
+                        countOperation--;
                     }
                     else
-                    { 
-                        
+                    {
+                        countNumber--;
+                        numbersStack[countNumber - 1] = IsResultOperation(operationStack[countOperation - 1], numbersStack[countNumber - 1], numbersStack[countNumber]);
+                        countOperation--;
+                        i--;
                     }
                 }
-                
+                if (i == getStringArray.Length-1)
+                {
 
+                    while (countOperation!=0)
+                    {
+                        countNumber--;
+                        numbersStack[countNumber - 1] = IsResultOperation(operationStack[countOperation - 1], numbersStack[countNumber - 1], numbersStack[countNumber]);
+                        countOperation--;
+                    }
+                }
             }
-
             
+            
+            Console.WriteLine($"Result:{numbersStack[0]}");
+            Console.ReadLine();
+
         }
 
         static string[] GetStringArray(string something)
@@ -154,7 +176,7 @@
 
         static bool CheckIfIsOperation(char symbol)
         {
-            char[] arrayOperation = { '+', '-', '*', '/', '(', ')' };
+            char[] arrayOperation = { '+', '-', '*', '/', '(', ')','^' };
             for (int i = 0; i < arrayOperation.Length; i++)
             {
                 if (symbol == arrayOperation[i])
@@ -190,6 +212,34 @@
                     break;
                 case '^':
                     result = 3;
+                    break;
+
+            }
+            return result;
+
+        }
+
+        static double IsResultOperation(string operation, double penultimateNumberStack,double lastNumberStack)
+
+        {   double result=0;
+            char literal = operation.ToCharArray()[0];
+
+            switch (literal)
+            {
+                case '+':
+                    result = penultimateNumberStack + lastNumberStack;
+                    break;
+                case '-':
+                    result = penultimateNumberStack - lastNumberStack;
+                    break;
+                case '*':
+                    result = penultimateNumberStack * lastNumberStack;
+                    break;
+                case '/':
+                    result = penultimateNumberStack / lastNumberStack;
+                    break;
+                case '^':
+                    result = Math.Pow(penultimateNumberStack, lastNumberStack);
                     break;
 
             }
