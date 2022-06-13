@@ -6,112 +6,36 @@
 
         static public void Main()
         {
-            ////////////  PART 1 ARRAY
-            //string something = "1+2*3/6+7*2+1*2/2*1+35-19"; //33
-            //string something = "(1+2)*3/6+7+17*2*(3+8)"; //16
-            string something = "2+3+(-6)"; //
-            //string something = "1+2*3/6+7*2+17*2"; //49
+
+            Console.WriteLine("Hello, I am calculator");
+            string something;
+            something= InputMathematicalExpression();
+
 
             string[] operationStack=  new string[something.Length];
             double[] numbersStack= new double[something.Length];
             string[] getStringArray = GetStringArray(something);
 
 
-            //CheckParentheses(secondArrayGet); 
+            //if (!CheckParentheses(getStringArray))
+            //{
+                IsResultCalculation(operationStack, numbersStack, getStringArray);
+           // }
+            
 
-            ////////////////// PART 2 
 
-            var countNumber = 0;
-            var countOperation = 0;
 
-            for (int i = 0; i < getStringArray.Length;i++ )
-            {
-                if (!CheckIfIsOperationString(getStringArray[i]))
-                {
-                    numbersStack[countNumber] = double.Parse(getStringArray[i]);
-                    countNumber++;
-                }
-                else if (CheckIfIsOperationString(getStringArray[i]))
-                {
-                    if (countOperation == 0  || CheckPriorityOperation(getStringArray[i]) > CheckPriorityOperation(operationStack[countOperation - 1]))   
-                    {
-                        operationStack[countOperation] = getStringArray[i];
-                        countOperation++;
-                    }
-                    
-                    else if (getStringArray[i].ToCharArray()[0] == ')')
-                    {
-                        
-                        while (operationStack[countOperation-1].ToCharArray()[0] != '(')
-                        {
-                            countNumber--;
-                            numbersStack[countNumber - 1] = IsResultOperation(operationStack[countOperation - 1], numbersStack[countNumber - 1], numbersStack[countNumber]);
-                            countOperation--;
-                        }
-                   
-                        countOperation--;
-                        
-                    }
-                    else if (getStringArray[i].ToCharArray()[0] == '(')
-                    {
-                        if (getStringArray[i+1].ToCharArray()[0] == '-' && getStringArray[i + 3].ToCharArray()[0] ==')')
-                        {
-                            
-                            numbersStack[countNumber] = - (double.Parse(getStringArray[i+2]));
-                            countNumber++;
-                            i=i+3;
-                        }
-                        else if (getStringArray[i + 1].ToCharArray()[0] == '+' && getStringArray[i + 3].ToCharArray()[0] == ')')
-                        {
-                            numbersStack[countNumber] = double.Parse(getStringArray[i + 2]);
-                            countNumber++;
-                            i = i + 3;
-                        }
-                        else if (getStringArray[i + 1].ToCharArray()[0] == '+' && getStringArray[i + 3].ToCharArray()[0] != ')')
-                        {
-                            operationStack[countOperation] = getStringArray[i];
-                            numbersStack[countNumber] = double.Parse(getStringArray[i + 2]);
-                            countOperation++;
-                            countNumber++;
-                            i=i+2;
-                            
-                        }
-                        else if (getStringArray[i + 1].ToCharArray()[0] == '-' && getStringArray[i + 3].ToCharArray()[0] != ')')
-                        {
-                            operationStack[countOperation] = getStringArray[i];
-                            numbersStack[countNumber] = -(double.Parse(getStringArray[i + 2]));
-                            countOperation++;
-                            countNumber++;
-                            i=i+2;
-                        }
-                        else
-                        {
-                            operationStack[countOperation] = getStringArray[i];
-                            countOperation++;
-                        }
-                    }
-                    else
-                    {
-                        countNumber--;
-                        numbersStack[countNumber - 1] = IsResultOperation(operationStack[countOperation - 1], numbersStack[countNumber - 1], numbersStack[countNumber]);
-                        countOperation--;
-                        i--;
-                    }
-                }
-                if (i == getStringArray.Length-1)
-                {
-                    while (countOperation!=0)
-                    {
-                        countNumber--;
-                        numbersStack[countNumber - 1] = IsResultOperation(operationStack[countOperation - 1], numbersStack[countNumber - 1], numbersStack[countNumber]);
-                        countOperation--;
-                         
-                    }
-                }
-            }
-            Console.WriteLine($"Result:{numbersStack[0]}");
-            Console.ReadLine();
+        }
 
+        static string InputMathematicalExpression()
+        
+        {
+            
+           
+            Console.WriteLine("Enter mathematical expression...");
+            string something = Console.ReadLine();
+            //string something = "8-7.40+892/35-(85+89*3/7-750+(431))-70/(2+(-4+(-17)+18/3-2))/15";
+            return something;
         }
 
         static string[] GetStringArray(string something)
@@ -122,7 +46,7 @@
             var SizeArray = 0;
             for (int i = 0; i < something.Length; i++)
             {
-                //ctrl +k+d
+                
                 if (CheckIfIsSymbol(something[i]))
                 {
 
@@ -156,13 +80,13 @@
             string[] secondArrayGet = new string[SizeArray];
             Array.Copy(getStringArray, secondArrayGet, secondArrayGet.Length);
 
-            var y = 0;
+           /* var y = 0;
             foreach (var item in secondArrayGet)
             {
                 y++;
                 Console.WriteLine($"[{y}]={item}");
             }
-
+           */
             return secondArrayGet;
 
 
@@ -285,7 +209,113 @@
 
         }
 
-        
+        static void IsResultCalculation (string[] operationStack, double[] numbersStack,  string [] getStringArray)
+        {
+            var countNumber = 0;
+            var countOperation = 0;
+            var testNumber = false;
+
+            for (int i = 0; i < getStringArray.Length; i++)
+            {
+                if (!CheckIfIsOperationString(getStringArray[i]))
+                {
+                    testNumber = double.TryParse(getStringArray[i], out numbersStack[countNumber]);
+                    countNumber++;
+                    if (!testNumber)
+                    {
+                        Console.WriteLine("You put more than one dot in the number");
+                        return;
+                    }
+                }
+                else if (CheckIfIsOperationString(getStringArray[i]))
+                {
+                    if (countOperation == 0 || CheckPriorityOperation(getStringArray[i]) > CheckPriorityOperation(operationStack[countOperation - 1]))
+                    {
+                        operationStack[countOperation] = getStringArray[i];
+                        countOperation++;
+                    }
+
+                    else if (getStringArray[i].ToCharArray()[0] == ')')
+                    {
+
+                        while (operationStack[countOperation - 1].ToCharArray()[0] != '(')
+                        {
+                            countNumber--;
+                            numbersStack[countNumber - 1] = IsResultOperation(operationStack[countOperation - 1], numbersStack[countNumber - 1], numbersStack[countNumber]);
+                            countOperation--;
+                        }
+                        countOperation--;
+                    }
+                    else if (getStringArray[i].ToCharArray()[0] == '(')
+                    {
+                        if (getStringArray[i + 1].ToCharArray()[0] == '-' && getStringArray[i + 3].ToCharArray()[0] == ')')
+                        {
+
+                            numbersStack[countNumber] = -(double.Parse(getStringArray[i + 2]));
+                            countNumber++;
+                            i = i + 3;
+                        }
+                        else if (getStringArray[i + 1].ToCharArray()[0] == '+' && getStringArray[i + 3].ToCharArray()[0] == ')')
+                        {
+                            numbersStack[countNumber] = double.Parse(getStringArray[i + 2]);
+                            countNumber++;
+                            i = i + 3;
+                        }
+                        else if (getStringArray[i + 1].ToCharArray()[0] == '+' && getStringArray[i + 3].ToCharArray()[0] != ')')
+                        {
+                            operationStack[countOperation] = getStringArray[i];
+                            numbersStack[countNumber] = double.Parse(getStringArray[i + 2]);
+                            countOperation++;
+                            countNumber++;
+                            i = i + 2;
+
+                        }
+                        else if (getStringArray[i + 1].ToCharArray()[0] == '-' && getStringArray[i + 3].ToCharArray()[0] != ')')
+                        {
+                            operationStack[countOperation] = getStringArray[i];
+                            numbersStack[countNumber] = -(double.Parse(getStringArray[i + 2]));
+                            countOperation++;
+                            countNumber++;
+                            i = i + 2;
+                        }
+                        else
+                        {
+                            operationStack[countOperation] = getStringArray[i];
+                            countOperation++;
+                        }
+                    }
+                    else
+                    {
+                        countNumber--;
+                        numbersStack[countNumber - 1] = IsResultOperation(operationStack[countOperation - 1], numbersStack[countNumber - 1], numbersStack[countNumber]);
+                        countOperation--;
+                        i--;
+                    }
+                }
+                if (i == getStringArray.Length - 1)
+                {
+                    while (countOperation != 0)
+                    {
+                        countNumber--;
+                        numbersStack[countNumber - 1] = IsResultOperation(operationStack[countOperation - 1], numbersStack[countNumber - 1], numbersStack[countNumber]);
+                        countOperation--;
+                    }
+                }
+            }
+            Console.WriteLine($"Result:{numbersStack[0]}");
+            Console.WriteLine("Press any key or 'Y' if you want to exit!");
+            var testY = Console.ReadLine();
+            if (testY == "Y" || testY == "y")
+            {
+                return;
+            }
+            else
+            {
+                Console.Clear();
+               // InputMathematicalExpression(); Expression for recursii
+            }
+
+        }
 
 
 
