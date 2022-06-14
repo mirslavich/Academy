@@ -6,12 +6,10 @@
 
         static public void Main()
         {
-
             Console.WriteLine("Hello, I am calculator. I can '+', '-', '/', '*', '^'");
-            GeneralFunction();
+            IsGeneralFunction();
             Console.WriteLine("\t See you later!");
         }
-
         static string InputMathematicalExpression()
         {
             Console.WriteLine("Enter mathematical expression...");
@@ -23,17 +21,14 @@
             }
             return inputExpression;
         }
-        static void GeneralFunction()
+        static void IsGeneralFunction()
         {
             string inputExpression;
-
             inputExpression = InputMathematicalExpression();
-
             CheckInputErrors(inputExpression);
             string[] operationStack = new string[inputExpression.Length];
             double[] numbersStack = new double[inputExpression.Length];
             string[] getStringArray = GetStringArray(inputExpression);
-
             IsResultExpression(operationStack, numbersStack, getStringArray);
         }
         static string[] GetStringArray(string inputExpression)
@@ -84,19 +79,19 @@
                 if (CheckErorSymbol(array[0]) || CheckErorSymbol(array[array.Length-1] ))
                 {
                     Console.WriteLine("Eror operation. You can not put the operation at the beginning or end");
-                    GeneralFunction();
+                    IsGeneralFunction();
                 }
                 if (CheckErorSymbol(array[i]) && CheckErorSymbol(array[i - 1]))
                 {
                     Console.WriteLine("Eror operation. More than one operation sign");
-                    GeneralFunction();
+                    IsGeneralFunction();
                 }
                 if (i !=0 && array[i] == '(' && array[i - 1] == ')' ||
                     i != 0 && array[i] == ')' && array[i - 1] == '(' ||
                     CheckErorSymbol(array[i]) && array[i + 1] == ')')
                 {
                     Console.WriteLine("Invalid parentheses");
-                    GeneralFunction();
+                    IsGeneralFunction();
                 }
                 if (array[i] == '(')
                 {
@@ -110,14 +105,12 @@
             if (firstCounter != secondCounter)
             {
                 Console.WriteLine("You entered the wrong number of parentheses");
-                GeneralFunction();
+                IsGeneralFunction();
             }
         }
-
         static bool CheckIfIsSymbol(char symbol)
         {
             char[] arrayNumbers = { '.', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
-
             for (int i = 0; i < arrayNumbers.Length; i++)
             {
                 if (symbol == arrayNumbers[i])
@@ -127,7 +120,6 @@
             }
             return false;
         }
-
         static bool CheckIfIsOperation(char operation)
         {
             char[] arrayOperation = { '+', '-', '*', '/', '(', ')', '^' };
@@ -140,7 +132,6 @@
             }
             return false;
         }
-
         static bool CheckErorSymbol(char operation)
         {
             char[] arrayOperation = { '+', '-', '*', '/', ',', '.', '^' };
@@ -153,7 +144,6 @@
             }
             return false;
         }
-
         static bool CheckIfIsOperationString(string literal)
         {
             char c = literal.ToCharArray()[0];
@@ -163,7 +153,6 @@
             }
             return false;
         }
-
         static int CheckPriorityOperation(string operation)
         {
             var result = 0;
@@ -184,7 +173,6 @@
             }
             return result;
         }
-
         static double CalculationTwoNumbers(string operation, double penultimateNumberStack, double lastNumberStack)
         {
             double result = 0;
@@ -209,13 +197,11 @@
             }
             return result;
         }
-
         static void IsResultExpression(string[] operationStack, double[] numbersStack, string[] getStringArray)
         {
             var countNumber = 0;
             var countOperation = 0;
             var testNumber = false;
-
             for (int i = 0; i < getStringArray.Length; i++)
             {
                 if (!CheckIfIsOperationString(getStringArray[i]))
@@ -225,7 +211,7 @@
                     if (!testNumber)
                     {
                         Console.WriteLine("You put more than one dot in the number");
-                        GeneralFunction();
+                        IsGeneralFunction();
                     }
                 }
                 else if (CheckIfIsOperationString(getStringArray[i]))
@@ -235,10 +221,8 @@
                         operationStack[countOperation] = getStringArray[i];
                         countOperation++;
                     }
-
                     else if (getStringArray[i].ToCharArray()[0] == ')')
                     {
-
                         while (operationStack[countOperation - 1].ToCharArray()[0] != '(')
                         {
                             countNumber--;
@@ -251,7 +235,6 @@
                     {
                         if (getStringArray[i + 1].ToCharArray()[0] == '-' && getStringArray[i + 3].ToCharArray()[0] == ')')
                         {
-
                             numbersStack[countNumber] = -(double.Parse(getStringArray[i + 2]));
                             countNumber++;
                             i = i + 3;
@@ -269,7 +252,6 @@
                             countOperation++;
                             countNumber++;
                             i = i + 2;
-
                         }
                         else if (getStringArray[i + 1].ToCharArray()[0] == '-' && getStringArray[i + 3].ToCharArray()[0] != ')')
                         {
@@ -313,15 +295,9 @@
             else
             {
                 Console.Clear();
-                GeneralFunction();
+                IsGeneralFunction();
             }
-
         }
-
-
-
-
-
     }
 }
 
