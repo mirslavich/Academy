@@ -44,10 +44,8 @@
             var SizeArray = 0;
             for (int i = 0; i < inputExpression.Length; i++)
             {
-
                 if (CheckIfIsSymbol(inputExpression[i]))
                 {
-
                     if (!inNumber)
                     {
                         operandIndex++;
@@ -70,21 +68,12 @@
                 }
                 else
                 {
-                    Console.WriteLine("Input error symbol : " + inputExpression[i]);
                     inNumber = false;
                 }
             }
-
-            string[] secondArrayGet = new string[SizeArray];
-            Array.Copy(getStringArray, secondArrayGet, secondArrayGet.Length);
-
-            var y = 0;
-            foreach (var item in secondArrayGet)
-            {
-                y++;
-                Console.WriteLine($"[{y}]={item}");
-            }
-            return secondArrayGet;
+            string[] getTrueArray = new string[SizeArray];
+            Array.Copy(getStringArray, getTrueArray, getTrueArray.Length);          
+            return getTrueArray;
         }
         static void CheckInputErrors(string array)
         {
