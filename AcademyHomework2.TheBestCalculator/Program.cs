@@ -10,6 +10,7 @@
             IsGeneralFunction();
             Console.WriteLine("\t See you later!");
         }
+
         static string InputMathematicalExpression()
         {
             Console.WriteLine("Enter mathematical expression...");
@@ -21,16 +22,18 @@
             }
             return inputExpression;
         }
+        
         static void IsGeneralFunction()
         {
-            string inputExpression;
-            inputExpression = InputMathematicalExpression();
+           
+            var inputExpression = InputMathematicalExpression();
             CheckInputErrors(inputExpression);
             string[] operationStack = new string[inputExpression.Length];
             double[] numbersStack = new double[inputExpression.Length];
             string[] getStringArray = GetStringArray(inputExpression);
             IsResultExpression(operationStack, numbersStack, getStringArray);
         }
+       
         static string[] GetStringArray(string inputExpression)
         {
             string[] getStringArray = new string[inputExpression.Length];
@@ -70,6 +73,7 @@
             Array.Copy(getStringArray, getTrueArray, getTrueArray.Length);          
             return getTrueArray;
         }
+        
         static void CheckInputErrors(string array)
         {
             var firstCounter = 0;
@@ -108,6 +112,7 @@
                 IsGeneralFunction();
             }
         }
+        
         static bool CheckIfIsSymbol(char symbol)
         {
             char[] arrayNumbers = { '.', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
@@ -120,6 +125,7 @@
             }
             return false;
         }
+       
         static bool CheckIfIsOperation(char operation)
         {
             char[] arrayOperation = { '+', '-', '*', '/', '(', ')', '^' };
@@ -132,6 +138,7 @@
             }
             return false;
         }
+        
         static bool CheckErorSymbol(char operation)
         {
             char[] arrayOperation = { '+', '-', '*', '/', ',', '.', '^' };
@@ -144,6 +151,7 @@
             }
             return false;
         }
+       
         static bool CheckIfIsOperationString(string literal)
         {
             char c = literal.ToCharArray()[0];
@@ -153,6 +161,7 @@
             }
             return false;
         }
+       
         static int CheckPriorityOperation(string operation)
         {
             var result = 0;
@@ -173,6 +182,7 @@
             }
             return result;
         }
+       
         static double CalculationTwoNumbers(string operation, double penultimateNumberStack, double lastNumberStack)
         {
             double result = 0;
@@ -197,6 +207,7 @@
             }
             return result;
         }
+       
         static void IsResultExpression(string[] operationStack, double[] numbersStack, string[] getStringArray)
         {
             var countNumber = 0;
@@ -288,15 +299,12 @@
             Console.WriteLine($"Result:{numbersStack[0]}");
             Console.WriteLine("Press any key or 'Y' if you want to exit!");
             var testY = Console.ReadLine();
-            if (testY == "Y" || testY == "y")
-            {
-                return;
-            }
-            else
+            if (testY != "Y" || testY != "y")
             {
                 Console.Clear();
                 IsGeneralFunction();
             }
+            
         }
     }
 }
