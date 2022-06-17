@@ -75,16 +75,14 @@
             }
             Console.WriteLine("Press any key or 'Y' if you want to exit!");
             var testY = Console.ReadLine();
-            if (testY == "Y" || testY == "y")
-            {
-                return;
-            }
-            else
+            if (testY != "Y" || testY != "y")
             {
                 Console.Clear();
                 GeneralFunction();
             }
+           
         }
+        
         static double InputNumber()
         {
             double firstNumber;
@@ -101,26 +99,31 @@
             while (!check);
             return firstNumber;
         }
+       
         static void AdditionNumbers(double firstNumbers, double secondNumbers) //+
         {
             var result = firstNumbers + secondNumbers;
             Console.WriteLine($"\nResult: {firstNumbers}+{secondNumbers}={result}");  
         }
+       
         static void SubtractionNumbers(double firstNumbers, double secondNumbers) //-
         {
             var result = firstNumbers - secondNumbers;
             Console.WriteLine($"\nResult: {firstNumbers}-{secondNumbers}={result}");
         }
+       
         static void MultiplicationNumbers(double firstNumbers, double secondNumbers) //*
         {
             var result = firstNumbers * secondNumbers;
             Console.WriteLine($"\nResult: {firstNumbers}*{secondNumbers}={result}");
         }
+       
         static void DivideNumbers(double firstNumbers, double secondNumbers) // /
         {
             var result = firstNumbers / secondNumbers;
             Console.WriteLine($"\nResult: {firstNumbers}/{secondNumbers}={result}");
         }
+       
         static ulong FactorialNumbers(ulong  someNumbers) // n!
         {
             ulong result=1;
