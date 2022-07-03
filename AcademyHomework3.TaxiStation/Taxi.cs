@@ -3,11 +3,10 @@
     public class Taxi: IComparable<Taxi>
     {
         
-        public int Id { get; set; } // id такси +
-        public double Consumption { get; set; } // расход топлива +
-        public double Cost { get; set; } // цена +
-       
-        public double Speed { get; set; } // скорость  +
+        public int Id { get; set; } 
+        public double Consumption { get; set; } 
+        public double Cost { get; set; } 
+        public double Speed { get; set; } 
 
         public Taxi(int id, double consumption, double cost, double speed)
         {
@@ -17,10 +16,7 @@
             Speed = speed;
         }
         public virtual string PrintInfo()
-        {
-            
-            //Console.WriteLine($"Id:{Id} Consumption:{Consumption} Cost:{Cost} Speed: {Speed}");
-
+        {        
             return "Id: " +Id + " Consumption: " + Consumption + " Cost: " + Cost + " Speed: " + Speed;
         }
         public int CompareTo(Taxi? other)

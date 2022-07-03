@@ -8,7 +8,6 @@ namespace AcademyHomework3.TaxiStation
     {
         public Taxi _previewTaxi { get;private set; }
         private List<Taxi> _collection;
-        
 
         public TaxiStation()
         {
@@ -30,25 +29,38 @@ namespace AcademyHomework3.TaxiStation
             }
             return result;
         }
+
         public void SortList()
         {
             _collection.Sort();
         }
+
         public void GenerateTaxi()
         {
            // ITaxiFactory factory = new TaxiUsualFactory(15, 48, 175,100,false,true);
            ITaxiFactory ranFactory = TaxiRandomFactory.GetRandomTaxiFactory();
            _previewTaxi = ranFactory.GenerateTaxi();
         }
+
         public List<Taxi> GetTaxiList()
         {
             return _collection;
         }
 
-        
         public void SavePreviewTaxi()
         {
             _collection.Add(_previewTaxi);
+        }
+
+        public string CalculateCostCarPark()
+        {
+            double result = 0;
+            foreach (var item in _collection)
+            {
+                result += item.Cost;
+            }
+            
+            return "Full cost is: " + result;
         }
 
 

@@ -8,8 +8,8 @@ namespace AcademyHomework3.TaxiStation.Factories
             Random random = new Random();
             return new TaxiBus(
                 (int)random.NextInt64(10000, int.MaxValue),
-                random.NextInt64(5, 15),
-                random.NextInt64(5000, 50000),
+                random.NextInt64(16, 25),
+                random.NextInt64(50000, 150000),
                 random.NextInt64(90, 120));
         }
     }

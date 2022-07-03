@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AcademyHomework1.Multiplica
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AcademyHomework2.Calculator", "AcademyHomework2.Calculator\AcademyHomework2.Calculator.csproj", "{7D25D669-6B98-4E47-9397-0D8FBD315DE5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcademyHomework2.TheBestCalculator", "AcademyHomework2.TheBestCalculator\AcademyHomework2.TheBestCalculator.csproj", "{6119726D-9D23-4764-B375-D6535DECB18B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AcademyHomework2.TheBestCalculator", "AcademyHomework2.TheBestCalculator\AcademyHomework2.TheBestCalculator.csproj", "{6119726D-9D23-4764-B375-D6535DECB18B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcademyHomework3.TaxiStation", "AcademyHomework3.TaxiStation\AcademyHomework3.TaxiStation.csproj", "{E70FEE68-1347-4E87-A3E3-BDB02833BFF4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{6119726D-9D23-4764-B375-D6535DECB18B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6119726D-9D23-4764-B375-D6535DECB18B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6119726D-9D23-4764-B375-D6535DECB18B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E70FEE68-1347-4E87-A3E3-BDB02833BFF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E70FEE68-1347-4E87-A3E3-BDB02833BFF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E70FEE68-1347-4E87-A3E3-BDB02833BFF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E70FEE68-1347-4E87-A3E3-BDB02833BFF4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

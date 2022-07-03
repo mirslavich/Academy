@@ -11,12 +11,10 @@ namespace AcademyHomework3.TaxiStation.Factories
         private readonly int _id;
         private readonly double _consumption;
         private readonly double _cost;
-
         private readonly double _speed;
         private readonly bool _seatForChild;
         private readonly bool _seatForAnimal;
         private readonly int _numberOfPassengerSeaats;
-
         
         public TaxiUsualFactory(int id, double consumption, double cost, double speed, bool seatForChild, bool seatForAnimal, int numberOfPassengerSeaats=4)
         {
