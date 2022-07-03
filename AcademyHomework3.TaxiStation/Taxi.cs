@@ -4,11 +4,11 @@
     {
         
         public int Id { get; set; } 
-        public double Consumption { get; set; } 
-        public double Cost { get; set; } 
-        public double Speed { get; set; } 
+        public int Consumption { get; set; } 
+        public int Cost { get; set; } 
+        public int Speed { get; set; } 
 
-        public Taxi(int id, double consumption, double cost, double speed)
+        public Taxi(int id, int consumption, int cost, int speed)
         {
             Id = id;
             Consumption = consumption;

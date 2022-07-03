@@ -1,30 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AcademyHomework3.TaxiStation.Factories
+﻿namespace AcademyHomework3.TaxiStation.Factories
 {
     public class TaxiRandomFactory
     {
-        public TaxiRandomFactory()
-        {
-
-        }
-
         public static ITaxiFactory GetRandomTaxiFactory()
         { 
             Random random = new Random();
-            switch (random.Next(1,3))
+            switch (random.Next(1,5))
             {
                 case 1:
                     return new RandomTaxiUsualFactory();
                 case 2:
                     return new RandomTaxiBusFactory();
+                case 3:
+                    return new RandomTaxiDelivery();
+                case 4:
+                    return new RandomTaxiHelicopter();
                 default:
                     return null;
-
             }
         }
     }

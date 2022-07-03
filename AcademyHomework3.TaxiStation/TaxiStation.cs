@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using AcademyHomework3.TaxiStation.Factories;
-
-
+﻿using AcademyHomework3.TaxiStation.Factories;
 namespace AcademyHomework3.TaxiStation
 {
     public class TaxiStation
@@ -11,13 +8,26 @@ namespace AcademyHomework3.TaxiStation
 
         public TaxiStation()
         {
-            _collection = new List<Taxi>();
+           _collection = new List<Taxi>();
         }
-        public void LoadFromFile(string path)
+        public void LoadFromFile()
         {
-
+            //var filePath = @"TaxiStation.txt";
+            //var taxiStringRepresentation= File.ReadAllText(filePath);
+            // _collection= new List<Taxi>();
+            
+            //foreach (var item in taxiStringRepresentation)
+            //{
+            //    var data = item.Split('-');
+            //    var taxi = new Taxi(int.Parse(data[0]), int.Parse(data[1]), int.Parse(data[2]),int.Parse(data[3]));
+            //    _collection.Add(taxi);
+            //}
+            //foreach (var item in _collection)
+            //{
+            //    Console.WriteLine($"Cat {item.Id} - color-{item.Speed}");
+            //}
         }
-        public List<Taxi> GetTaxiBySpeed(double speedMin, double speedMax)
+        public List<Taxi> GetTaxiBySpeed(int speedMin, int speedMax)
         { 
             List<Taxi> result = new List<Taxi>();
             foreach (var item in _collection)
@@ -37,7 +47,7 @@ namespace AcademyHomework3.TaxiStation
 
         public void GenerateTaxi()
         {
-           // ITaxiFactory factory = new TaxiUsualFactory(15, 48, 175,100,false,true);
+           
            ITaxiFactory ranFactory = TaxiRandomFactory.GetRandomTaxiFactory();
            _previewTaxi = ranFactory.GenerateTaxi();
         }

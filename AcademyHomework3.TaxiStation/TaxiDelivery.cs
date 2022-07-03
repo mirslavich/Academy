@@ -1,11 +1,16 @@
 ﻿namespace AcademyHomework3.TaxiStation
 {
-    public class TaxiDelivery
+    public class TaxiDelivery:Taxi
     {
-       public double UsefulWeight { get; set; }
-        public void PrintInfoAboutWeight()
+        private int _usefulWeight { get; set; }
+
+        public TaxiDelivery(int id, int consumption, int cost, int speed,int usefulWeight) : base (id,consumption,cost,speed)
         {
-            Console.WriteLine($"Taxi is carrying {UsefulWeight}");
+            _usefulWeight = usefulWeight;
+        }
+        public override string PrintInfo()
+        {
+            return "Taxi delivery: " + base.PrintInfo() + " Useful weight: " + _usefulWeight;
         }
     }
 }
