@@ -3,6 +3,5 @@
     public interface ITaxiFactory
     {
         public Taxi GenerateTaxi();
-
     }
 }

@@ -5,7 +5,7 @@ namespace AcademyHomework3.TaxiStation
     {
         public Taxi _previewTaxi { get;private set; }
         private List<Taxi> _collection;
-
+        
         public TaxiStation()
         {
            _collection = new List<Taxi>();
@@ -25,7 +25,6 @@ namespace AcademyHomework3.TaxiStation
                 }
                 Console.WriteLine("File was loaded");
             }
-
         }
 
         public void SaveToFile(string filePath)
@@ -38,7 +37,6 @@ namespace AcademyHomework3.TaxiStation
                     bw.Write(item.Consumption);
                     bw.Write(item.Cost);
                     bw.Write(item.Speed);
-                    //bw.Write(item.)
                 }
                 Console.WriteLine("File was saved");
             }
@@ -88,8 +86,5 @@ namespace AcademyHomework3.TaxiStation
             return "Full cost is: " + result;
         }
     }
-        
-    
-
 }
 

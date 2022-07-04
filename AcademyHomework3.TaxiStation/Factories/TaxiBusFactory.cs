@@ -21,7 +21,5 @@
         {
             return new TaxiBus(_id, _consumption, _cost, _speed, _numberOfPassengerSeaats);
         }
-
-
     }
 }

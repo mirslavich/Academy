@@ -21,8 +21,5 @@
         {
             return new TaxiHelicopter(_id, _consumption, _cost, _speed, _numberOfPassengerSeaats);
         }
-
-
-
     }
 }

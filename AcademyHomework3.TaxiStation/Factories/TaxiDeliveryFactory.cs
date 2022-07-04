@@ -21,7 +21,5 @@
         {
             return new TaxiDelivery(_id, _consumption, _cost, _speed, _usefulWeight);
         }
-
-
     }
 }

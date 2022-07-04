@@ -25,7 +25,5 @@
         {
             return new TaxiUsual(_id, _consumption, _cost, _speed, _seatForChild, _seatForAnimal, _numberOfPassengerSeaats);
         }
-
-        
     }
 }
