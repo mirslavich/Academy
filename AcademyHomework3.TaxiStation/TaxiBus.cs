@@ -3,6 +3,7 @@
     public class TaxiBus: Taxi
     {
         private int _numberOfPassengerSeats { get; set; }
+
         public TaxiBus(int id, int consumption, int cost, int speed, int numberOfPassengerSeaats=16)
             : base(id, consumption, cost, speed)
         {

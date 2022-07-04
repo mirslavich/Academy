@@ -20,6 +20,5 @@
             SeatForAnimal = seatForAnimal;
             _numberOfPassengerSeats = numberOfPassengerSeaats;
         }
-
     }
 }

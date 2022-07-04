@@ -2,7 +2,6 @@
 {
     public class Taxi: IComparable<Taxi>
     {
-        
         public int Id { get; set; } 
         public int Consumption { get; set; } 
         public int Cost { get; set; } 
@@ -15,10 +14,12 @@
             Cost = cost;
             Speed = speed;
         }
+
         public virtual string PrintInfo()
         {        
             return "Id: " +Id + " Consumption: " + Consumption + " Cost: " + Cost + " Speed: " + Speed;
         }
+
         public int CompareTo(Taxi? other)
         {
             if (this.Consumption > other.Consumption)

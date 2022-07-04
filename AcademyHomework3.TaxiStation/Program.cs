@@ -15,11 +15,13 @@
 
         private static void ManageUserChoice(int userChoice, TaxiStation taxiStation)
         {
+            var filePath = @"TaxiStation.txt";
             switch (userChoice)
             {
                 case 0:
                     break;
                 case 1:
+                    taxiStation.LoadFromFile(filePath);
                     break;
                 case 2:
                     taxiStation.GenerateTaxi();
@@ -51,6 +53,9 @@
                 case 6:
                     Console.WriteLine(taxiStation.CalculateCostCarPark());
                     break;
+                case 7:
+                    taxiStation.SaveToFile(filePath);
+                    break;
                 default:
                     break;
             }
@@ -70,9 +75,9 @@
             //Console.Clear();
             Console.WriteLine("\t >>>>> Welcome to Taxi station <<<<<\n");
             Console.WriteLine("My option:\n 0.Exit from Taxi station\n 1.Loading from file.\n 2.Generate new taxi type.\n 3.Show park taxi list.\n" +
-            " 4.Sorting cars by consumption.\n 5.Find a car by speed range.\n 6.Calculate the cost of a car park.\n\n Enter number from 0 to 6!"); 
+            " 4.Sorting cars by consumption.\n 5.Find a car by speed range.\n 6.Calculate the cost of a car park.\n 7.Save to file.\n\n Enter number from 0 to 7!"); 
             bool isInput = int.TryParse(Console.ReadLine(), out int userChoice);
-            if (!isInput || userChoice>6 || userChoice<0)
+            if (!isInput || userChoice>7 || userChoice<0)
             {
                 Console.WriteLine(">>>>Input is wrong");
                 Console.ReadLine();

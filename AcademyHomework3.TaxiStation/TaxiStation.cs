@@ -10,20 +10,37 @@ namespace AcademyHomework3.TaxiStation
         {
            _collection = new List<Taxi>();
         }
-        public void LoadFromFile()
+
+        public void LoadFromFile(string filePath)
         {
-            var filePath = @"TaxiStation.txt";
-            var taxiStringRepresentation= File.ReadAllText(filePath);
-            _collection= new List<Taxi>();
-            foreach (string item in taxiStringRepresentation)
+            using (var br = new BinaryReader(File.Open(filePath, FileMode.Open, FileAccess.Read)))
             {
-                var data = item.Split('-');
-                var taxi = new Taxi(int.Parse(data[0]), int.Parse(data[1]), int.Parse(data[2]),int.Parse(data[3]));
-                _collection.Add(taxi);
+                while (br.PeekChar() > -1)
+                { 
+                    int id= br.ReadInt32();
+                    var consumption = br.ReadInt32();
+                    var cost = br.ReadInt32();
+                    var speed = br.ReadInt32();
+                    _collection.Add(new Taxi(id, consumption, cost, speed));
+                }
+                Console.WriteLine("File was loaded");
             }
-            foreach (var item in _collection)
+
+        }
+
+        public void SaveToFile(string filePath)
+        {
+            using (var bw = new BinaryWriter(File.Open(filePath, FileMode.OpenOrCreate, FileAccess.Write)))
             {
-                Console.WriteLine($"Id: {item.Id} - Consumption: {item.Consumption}- Cost: {item.Cost}- Speed: {item.Speed}");
+                foreach (var item in _collection)
+                {
+                    bw.Write(item.Id);
+                    bw.Write(item.Consumption);
+                    bw.Write(item.Cost);
+                    bw.Write(item.Speed);
+                    //bw.Write(item.)
+                }
+                Console.WriteLine("File was saved");
             }
         }
         public List<Taxi> GetTaxiBySpeed(int speedMin, int speedMax)
@@ -68,12 +85,8 @@ namespace AcademyHomework3.TaxiStation
             {
                 result += item.Cost;
             }
-            
             return "Full cost is: " + result;
         }
-
-
-
     }
         
     

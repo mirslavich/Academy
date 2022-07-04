@@ -8,6 +8,7 @@
         {
             _usefulWeight = usefulWeight;
         }
+
         public override string PrintInfo()
         {
             return "Taxi delivery: " + base.PrintInfo() + " Useful weight: " + _usefulWeight;
