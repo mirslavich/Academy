@@ -13,33 +13,60 @@ namespace AcademyHomework3.TaxiStation
 
         public void LoadFromFile(string filePath)
         {
-            using (var br = new BinaryReader(File.Open(filePath, FileMode.Open, FileAccess.Read)))
+            using (StreamReader br = new StreamReader(filePath))
             {
-                while (br.PeekChar() > -1)
-                { 
-                    int id= br.ReadInt32();
-                    var consumption = br.ReadInt32();
-                    var cost = br.ReadInt32();
-                    var speed = br.ReadInt32();
-                    _collection.Add(new Taxi(id, consumption, cost, speed));
+                string line;
+                string[] arguments;
+                while ((line = br.ReadLine()) != null)
+                {
+                    arguments = line.Split(" ");
+
+                    if (arguments[0] == "TaxiUsual")
+                    {
+                        TaxiUsualFactory factory = new TaxiUsualFactory(ArrayReduction(arguments));
+                        _collection.Add(factory.GenerateTaxi());
+
+                    }
+                    else if (arguments[0] == "TaxiBus")
+                    {
+                        TaxiBusFactory factory = new TaxiBusFactory(ArrayReduction(arguments));
+                        _collection.Add(factory.GenerateTaxi());
+                    }
+                    else if (arguments[0] == "TaxiDelivery")
+                    {
+                        TaxiDeliveryFactory factory = new TaxiDeliveryFactory(ArrayReduction(arguments));
+                        _collection.Add(factory.GenerateTaxi());
+                    }
+                    else if (arguments[0] == "TaxiHelicopter")
+                    {
+                        TaxiHelicopterFactory factory = new TaxiHelicopterFactory(ArrayReduction(arguments));
+                        _collection.Add(factory.GenerateTaxi());
+                    }
                 }
+                
                 Console.WriteLine("File was loaded");
             }
         }
 
+        private string[] ArrayReduction(string[] arg)
+        {
+            string[] result=new string[arg.Length-1];
+            Array.Copy(arg,1, result,0, arg.Length - 1);
+            return result;
+
+        }
+
         public void SaveToFile(string filePath)
         {
-            using (var bw = new BinaryWriter(File.Open(filePath, FileMode.OpenOrCreate, FileAccess.Write)))
+            using (StreamWriter bw = new StreamWriter(filePath, true, System.Text.Encoding.UTF8))
             {
                 foreach (var item in _collection)
                 {
-                    bw.Write(item.Id);
-                    bw.Write(item.Consumption);
-                    bw.Write(item.Cost);
-                    bw.Write(item.Speed);
+                    bw.WriteLine(item.GetSaveData());
                 }
                 Console.WriteLine("File was saved");
             }
+           
         }
         public List<Taxi> GetTaxiBySpeed(int speedMin, int speedMax)
         { 

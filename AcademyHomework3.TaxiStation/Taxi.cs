@@ -15,14 +15,17 @@
             Speed = speed;
         }
 
-        public Taxi(int id, int consumption, int cost, int speed, bool seatForChild, bool seatForAnimal, int numberOfPassengerSeats, int usefulWeight) : this(id, consumption, cost, speed)
-        {
-        }
-
         public virtual string PrintInfo()
         {        
             return "Id: " +Id + " Consumption: " + Consumption + " Cost: " + Cost + " Speed: " + Speed;
         }
+
+        public virtual string GetSaveData()
+        {
+            return  Id + " " + Consumption + " " +  Cost + " " + Speed;
+        }
+
+
 
         public int CompareTo(Taxi? other)
         {

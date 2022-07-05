@@ -13,5 +13,10 @@
         {
             return "Taxi delivery: " + base.PrintInfo() + " Useful weight: " + _usefulWeight;
         }
+
+        public override string GetSaveData()
+        {
+            return "TaxiDelivery " + base.GetSaveData() + " " + _usefulWeight;
+        }
     }
 }

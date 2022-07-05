@@ -13,5 +13,10 @@ namespace AcademyHomework3.TaxiStation
         {
             return "Taxi helicopter: " + base.PrintInfo() + " Number of passenger seats: " + _numberOfPassengerSeats;
         }
+
+        public override string GetSaveData()
+        {
+            return "TaxiHelicopter " + base.GetSaveData() + " " + _numberOfPassengerSeats;
+        }
     }
 }

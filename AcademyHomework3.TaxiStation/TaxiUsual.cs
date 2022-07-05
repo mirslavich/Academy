@@ -12,6 +12,11 @@
                 " Number of passenger seaats: " + _numberOfPassengerSeats;
         }
 
+        public override string GetSaveData()
+        {
+            return "TaxiUsual " + base.GetSaveData() + " " + SeatForChild + " " + SeatForAnimal + " " + _numberOfPassengerSeats;
+        }
+
         public TaxiUsual(int id, int consumption, int cost, int speed,
             bool seatForChild=false, bool seatForAnimal=false,int numberOfPassengerSeaats=4) 
             : base(id, consumption, cost, speed)

@@ -14,5 +14,10 @@
         {
             return "Bus taxi: " + base.PrintInfo() + " Number of passenger seaats: " + _numberOfPassengerSeats;
         }
+
+        public override string GetSaveData()
+        {
+            return "TaxiBus " + base.GetSaveData() + " " + _numberOfPassengerSeats;
+        }
     }
 }

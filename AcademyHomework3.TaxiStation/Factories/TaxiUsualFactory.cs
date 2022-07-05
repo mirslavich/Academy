@@ -21,6 +21,18 @@
             _numberOfPassengerSeaats = numberOfPassengerSeaats;
         }
 
+        public TaxiUsualFactory(string[] arguments)
+        {
+            _id = int.Parse(arguments[0]); 
+            _consumption = int.Parse(arguments[1]);
+            _cost = int.Parse(arguments[2]);
+            _speed = int.Parse(arguments[3]);
+            _seatForChild = bool.Parse(arguments[4]);
+            _seatForAnimal = bool.Parse(arguments[5]);
+            _numberOfPassengerSeaats = int.Parse(arguments[6]);
+        }
+
+
         public Taxi GenerateTaxi()
         {
             return new TaxiUsual(_id, _consumption, _cost, _speed, _seatForChild, _seatForAnimal, _numberOfPassengerSeaats);
