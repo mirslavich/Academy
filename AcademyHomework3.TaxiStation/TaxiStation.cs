@@ -20,12 +20,10 @@ namespace AcademyHomework3.TaxiStation
                 while ((line = br.ReadLine()) != null)
                 {
                     arguments = line.Split(" ");
-
                     if (arguments[0] == "TaxiUsual")
                     {
                         TaxiUsualFactory factory = new TaxiUsualFactory(ArrayReduction(arguments));
                         _collection.Add(factory.GenerateTaxi());
-
                     }
                     else if (arguments[0] == "TaxiBus")
                     {
@@ -43,7 +41,6 @@ namespace AcademyHomework3.TaxiStation
                         _collection.Add(factory.GenerateTaxi());
                     }
                 }
-                
                 Console.WriteLine("File was loaded");
             }
         }
@@ -53,7 +50,6 @@ namespace AcademyHomework3.TaxiStation
             string[] result=new string[arg.Length-1];
             Array.Copy(arg,1, result,0, arg.Length - 1);
             return result;
-
         }
 
         public void SaveToFile(string filePath)
@@ -66,8 +62,8 @@ namespace AcademyHomework3.TaxiStation
                 }
                 Console.WriteLine("File was saved");
             }
-           
         }
+
         public List<Taxi> GetTaxiBySpeed(int speedMin, int speedMax)
         { 
             List<Taxi> result = new List<Taxi>();
@@ -88,7 +84,6 @@ namespace AcademyHomework3.TaxiStation
 
         public void GenerateTaxi()
         {
-           
            ITaxiFactory ranFactory = TaxiRandomFactory.GetRandomTaxiFactory();
            _previewTaxi = ranFactory.GenerateTaxi();
         }

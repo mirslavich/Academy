@@ -12,7 +12,7 @@
 
         public override string PrintInfo()
         {
-            return "Bus taxi: " + base.PrintInfo() + " Number of passenger seaats: " + _numberOfPassengerSeats;
+            return "Bus taxi:      " + base.PrintInfo() + " Number of passenger seaats: " + _numberOfPassengerSeats;
         }
 
         public override string GetSaveData()

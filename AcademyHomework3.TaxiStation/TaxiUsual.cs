@@ -8,7 +8,7 @@
 
         public override string  PrintInfo()
         {
-            return "Usual taxi: " + base.PrintInfo()+ " Seat for child: " + SeatForChild + " Seat for animal: " + SeatForAnimal + 
+            return "Usual taxi:    " + base.PrintInfo()+ " Seat for child: " + SeatForChild + " Seat for animal: " + SeatForAnimal + 
                 " Number of passenger seaats: " + _numberOfPassengerSeats;
         }
 

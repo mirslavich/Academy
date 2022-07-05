@@ -39,7 +39,7 @@
                     }
                     break;
                 case 3:
-                    PrintList("Taxi list", taxiStation.GetTaxiList());
+                    PrintList(">>>>>>>>>Taxi list:\n", taxiStation.GetTaxiList());
                      break;
                 case 4:
                     taxiStation.SortList();

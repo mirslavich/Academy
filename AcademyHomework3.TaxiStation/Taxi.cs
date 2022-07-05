@@ -25,8 +25,6 @@
             return  Id + " " + Consumption + " " +  Cost + " " + Speed;
         }
 
-
-
         public int CompareTo(Taxi? other)
         {
             if (this.Consumption > other.Consumption)
