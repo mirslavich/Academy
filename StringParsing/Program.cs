@@ -16,9 +16,9 @@ namespace StringParsing
             var sentenceTestPathW = @"testSentenceW.txt";
 
 
-            var regexWord = new Regex(@"(?<ApWord>((\w+)(')(\w+)))|(?<HyWord>((\w+)(-)(\w+)))|(?<Rest>\w+)"); //only woord not always correct
-            var regexSentence = new Regex(@"((?:[A-Z]\.|[^\.!?])+)[\.!?]"); // only sentence not always correct
-            var regexPunctuationMarks = new Regex(@"");   // need to add punction regex
+            var regexWord = new Regex(@"(?<ApWord>((\w+)(')(\w+)))|(?<HyWord>((\w+)(-)(\w+)))|(?<Rest>\w+)");
+            var regexSentence = new Regex(@"((?:[A-Z]\.|[^\.!?])+)[\.!?]"); 
+            var regexPunctuationMarks = new Regex(@"");   
 
             var workWithFile = new TextFile(fileTestPathR, wordsTestPathW, sentenceTestPathW);
             GetWordsAndTheirNumbersByLinq(workWithFile, regexWord);
