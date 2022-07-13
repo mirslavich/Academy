@@ -38,7 +38,7 @@ namespace StringParsing
             {
                 sw.Write($"\t>>>>>>>The longest sentene: \n {theLongestSentence}");
                 sw.Write($"\n\t>>>>>>>Firs the shortest sentence: \n {theShortestSentence}");
-                sw.Write($"\n\t>>>>>>>>The most common letter:\n {letterAndLetterRepetition}");
+                sw.Write($"\n\t>>>>>>>>The most common letter case insensitive: \n {letterAndLetterRepetition}");
             }
         }
     }

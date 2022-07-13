@@ -10,13 +10,13 @@ namespace StringParsing
         static void Main(string[] args)
         {
             //var filePathRead = @"sample.txt";
-           // var fileTestPathR = @"sample1.txt";
-            var fileTestPathR = @"testR.txt";
+            var fileTestPathR = @"sample1.txt";
+            //var fileTestPathR = @"testR.txt";
             var wordsTestPathW = @"testWordsW.txt";
             var sentenceTestPathW = @"testSentenceW.txt";
 
 
-            var regexWord = new Regex(@"(?<ApWord>((\w+)(')(\w+)))|(?<HyWord>((\w+)(-)(\w+)))|(?<Rest>\w+)");
+            var regexWord = new Regex(@"(?<ApWord>((\b[a-zA-Z]+)(')(\w+)))|(?<HyWord>((\b[a-zA-Z]+)(-{1})([a-zA-Z]+)))|(?<Rest>\b[a-zA-Z]+)");
             var regexSentence = new Regex(@"[^.!?\s][^.!?]*(?:[.!?](?!['""]?\s|$)[^.!?]*)*[.!?]?['""]?(?=\s|$)");       
             var regexPunctuationMarks = new Regex(@"[!""#$%&'()*+,-.\/:;<=>?@[\]^_`{|}~]");   
 
@@ -65,7 +65,7 @@ namespace StringParsing
             {
                 var coutWordsInSentence = 0;
                 var matchesWordsInSentence = regexWord.Matches(item.Value);
-                if (matchesWordsInSentence.Count < minTimesWordsInSentence)
+                if (matchesWordsInSentence.Count  < minTimesWordsInSentence && matchesWordsInSentence.Count !=0)
                 {
                     minTimesWordsInSentence=matchesWordsInSentence.Count;
                    shortSentence = item.Value;
