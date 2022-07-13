@@ -2,13 +2,13 @@
 
 namespace StringParsing
 {
-    public class TextFile
+    public class WorkWithFile
     {
         private string _pathForReading;
         private string _pathForWritingWords;
         private string _pathforWritingSentence;
 
-        public TextFile(string pathForReading,string pathForWritingWords, string pathforWritingSentence)
+        public WorkWithFile(string pathForReading,string pathForWritingWords, string pathforWritingSentence)
         {
             _pathForReading = pathForReading;
             _pathForWritingWords = pathForWritingWords; 

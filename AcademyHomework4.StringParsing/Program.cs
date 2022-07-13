@@ -10,17 +10,17 @@ namespace StringParsing
         static void Main(string[] args)
         {
             //var filePathRead = @"sample.txt";
-            var fileTestPathR = @"sample1.txt";
-            //var fileTestPathR = @"testR.txt";
+           // var fileTestPathR = @"sample1.txt";
+            var fileTestPathR = @"testR.txt";
             var wordsTestPathW = @"testWordsW.txt";
             var sentenceTestPathW = @"testSentenceW.txt";
 
 
             var regexWord = new Regex(@"(?<ApWord>((\w+)(')(\w+)))|(?<HyWord>((\w+)(-)(\w+)))|(?<Rest>\w+)");
-            var regexSentence = new Regex(@"((?:[A-Z]\.|[^\.!?])+)[\.!?]"); 
-            var regexPunctuationMarks = new Regex(@"");   
+            var regexSentence = new Regex(@"[^.!?\s][^.!?]*(?:[.!?](?!['""]?\s|$)[^.!?]*)*[.!?]?['""]?(?=\s|$)");       
+            var regexPunctuationMarks = new Regex(@"[!""#$%&'()*+,-.\/:;<=>?@[\]^_`{|}~]");   
 
-            var workWithFile = new TextFile(fileTestPathR, wordsTestPathW, sentenceTestPathW);
+            var workWithFile = new WorkWithFile(fileTestPathR, wordsTestPathW, sentenceTestPathW);
             GetWordsAndTheirNumbersByLinq(workWithFile, regexWord);
             var isMaxRepetitionLetter = GetLetterWithMaxRepetititonByLinq(workWithFile);
             var isTheLongestSentence = GetSentenceWithMaxLetters(workWithFile, regexSentence);
@@ -28,7 +28,7 @@ namespace StringParsing
             workWithFile.SaveSmthInFile(isTheLongestSentence, isTheShortestSentence, isMaxRepetitionLetter);
             
         }
-        static void GetWordsAndTheirNumbersByLinq(TextFile workWithFile,Regex regexWord)
+        static void GetWordsAndTheirNumbersByLinq(WorkWithFile workWithFile,Regex regexWord)
         {
              var matchesWords = regexWord.Matches(workWithFile.GetFullText())
                 .GroupBy(x => x.Value)
@@ -40,7 +40,7 @@ namespace StringParsing
             }
         }
         
-        static string GetSentenceWithMaxLetters(TextFile workWithFile, Regex regexSentence)
+        static string GetSentenceWithMaxLetters(WorkWithFile workWithFile, Regex regexSentence)
         {
             var matchesMaxSentence = regexSentence.Matches(workWithFile.GetFullText()).ToList();
             int maxLength = 0;
@@ -56,7 +56,7 @@ namespace StringParsing
             return maxSentense;
         }
 
-        static string GetTheShortestSentence(TextFile workWithFile, Regex regexSentence, Regex regexWord)
+        static string GetTheShortestSentence(WorkWithFile workWithFile, Regex regexSentence, Regex regexWord)
         {
             var minTimesWordsInSentence = int.MaxValue;
             string shortSentence = "";
@@ -67,13 +67,14 @@ namespace StringParsing
                 var matchesWordsInSentence = regexWord.Matches(item.Value);
                 if (matchesWordsInSentence.Count < minTimesWordsInSentence)
                 {
-                    shortSentence = item.Value;
+                    minTimesWordsInSentence=matchesWordsInSentence.Count;
+                   shortSentence = item.Value;
                 }
             }
             return shortSentence;
         }
         
-        static string GetLetterWithMaxRepetititonByLinq(TextFile worsWithFile)
+        static string GetLetterWithMaxRepetititonByLinq(WorkWithFile worsWithFile)
         {
             string st = worsWithFile.GetFullText().ToLower();
             var count = st.Where(c => char.IsLetter(c))

@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AcademyHomework2.TheBestCal
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AcademyHomework3.TaxiStation", "AcademyHomework3.TaxiStation\AcademyHomework3.TaxiStation.csproj", "{E70FEE68-1347-4E87-A3E3-BDB02833BFF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringParsing", "StringParsing\StringParsing.csproj", "{0122C941-17F1-4A9A-B161-82F6D7291A1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AcademyHomework4.StringParsing", "AcademyHomework4.StringParsing\AcademyHomework4.StringParsing.csproj", "{0122C941-17F1-4A9A-B161-82F6D7291A1C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
