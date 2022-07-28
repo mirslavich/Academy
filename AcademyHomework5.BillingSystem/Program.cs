@@ -18,6 +18,7 @@
             } while (userChoice!=0);
 
         }
+
         static void HandlingUserInput(int someInput, ATS isATS)
         {
             switch (someInput)
@@ -44,10 +45,9 @@
                         ShowSelectionMenu();
                     }
                     var sortListCalls = GetSortCalls(isATS,iAmClient, inputUser);
-
                     foreach (var call in sortListCalls)
                     {
-                        Console.WriteLine($"Name: {call.FromClient.FirstName} Called the number: {call.ToPhoneNumber} Start: {call.StartDateTime} Cost:{call.CostOfCall}");
+                        Console.WriteLine($"Name: {call.FromClient.FirstName} Called the number: {call.ToPhoneNumber} Start: {call.StartDateTime} Cost: ${call.CostOfCall}");
                     }
                     break;
                 case 4:
@@ -61,6 +61,11 @@
                     GetСlient(isATS).DisconnectPhoneFromPort();
                     break;
                 case 7:
+                    Console.WriteLine("Enter sum");
+                    var sum = double.Parse(Console.ReadLine());
+                    GetСlient(isATS).PayForBilling(sum);
+                    break;
+                case 8:
                     isATS.SaveHistoryCalls();
                     Console.WriteLine("<<< History of calls saved");
                     break;
@@ -72,9 +77,10 @@
         static int ShowSelectionMenu()
         {
             Console.WriteLine(">>>>>>Welcome");
-            Console.WriteLine("[0]-Exit\n[1]-List phone numbers \n[2]-Call to someone \n[3]-Show histories calls\n[4]-Change tariff plan by random\n[5]-Connect phone to port\n[6]-Disconnect phone to port\n[7]-Save histories calls");
+            Console.WriteLine("[0]-Exit\n[1]-List phone numbers \n[2]-Call to someone \n[3]-Show histories calls\n[4]-Change tariff plan by random" +
+                "\n[5]-Connect phone to port\n[6]-Disconnect phone to port\n[7]-Pay for service\n[8]-Save histories calls");
             bool isInput = int.TryParse(Console.ReadLine(), out int userChoice);
-            if (!isInput || userChoice > 8 || userChoice < 0)
+            if (!isInput || userChoice > 9 || userChoice < 0)
             {
                 Console.WriteLine(">>>>Input is wrong");
                 Console.ReadLine();
@@ -119,6 +125,5 @@
             }
             return sortCallsList;
         }
-       
     }
 }

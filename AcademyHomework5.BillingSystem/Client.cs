@@ -19,10 +19,9 @@ public class Client
     public Phone Phone { get; }
     public Port Port { get; }
     public Tariff Tariff { get; set; }
-
+    public double Wallet { get; set; }
     public event NotificationCallHandler NotifyCall;
     public event NotificationChangeTariff NotifyChangeTariff;
-
 
     public Client(Guid agreement, string firstName, string secondName, 
         DateTime dateOfBirth, string adress, Phone phone, Port port, Tariff tariff)
@@ -46,7 +45,7 @@ public class Client
     {
         Phone.DisconnectPhoneFromPort(this);
     }
-    public void Call(int somePhoneNumber)   // проверка на абонента сети // проверка порта занято/или нет
+    public void Call(int somePhoneNumber)   
     {
         if ((this.Port.isActive && this.Phone.SomePhone) != false)
         {
@@ -58,25 +57,14 @@ public class Client
         }
     }
 
-    
-    
     public void ChangeTariffPlan(TariffPlans newTariff)
     {
-        
         NotifyChangeTariff?.Invoke(this, new NotificationChangeTariffEventArgs(newTariff));
     }
 
-    public void PayForBilling ()
+    public void PayForBilling (double sum)
     { 
-
+        Wallet+=sum;
+        Console.WriteLine($"you put {sum} on your balance");
     }
-
-    public void ShowCallsReport() // and sort by time/cost/ somebody
-    { 
-     
-    }
-
-
-
-
 }

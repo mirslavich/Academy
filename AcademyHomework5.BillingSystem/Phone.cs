@@ -63,12 +63,6 @@ public class Phone
             Console.WriteLine("Phone is already disconnect");
         }
     }
-
-    
-
-
-
-
 }
 
 

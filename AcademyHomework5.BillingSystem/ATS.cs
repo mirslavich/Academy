@@ -34,6 +34,7 @@ namespace AcademyHomework5.BillingSystem
             var newPhone = new Random().Next(4000000, 4999999);
             return newPhone;
         }
+
         private void StatusPhoneToPort(Client sender, NotificationPhoneConnectionToPortEventArgs eventArgs)
         {
             Clients.Find(c => c.Agreement == sender.Agreement).Phone.PhoneConnectionToPort = eventArgs.PhoneConnectionToPort;
@@ -47,7 +48,6 @@ namespace AcademyHomework5.BillingSystem
             int dateOfBirthDay = dateOfBirth.Next(1, 31);
             DateTime generateDateOfBirth = new DateTime(dateOfBirthYear, dateOfBirthMonth, dateOfBirthDay);
             return generateDateOfBirth;
-
         }
 
         private Guid SingAnAgreemeet()
@@ -69,7 +69,7 @@ namespace AcademyHomework5.BillingSystem
                 var addSecond = new Random().Next(2, 3600);
                 var endCall= callEventArgs.DateTimeNow.AddSeconds(addSecond);
                 CallsHistories.Add(new Call(sender,callEventArgs.DateTimeNow,endCall,callEventArgs.SomePhoneNumber, addSecond));
-
+                sender.Wallet -= CallsHistories.Last().CostOfCall;
             }
             else
             {
@@ -87,21 +87,12 @@ namespace AcademyHomework5.BillingSystem
             {
                 Console.WriteLine("You can change the tariff only once a month!");
             }
- 
-        }
+         }
 
         public void SaveHistoryCalls()
         {
             var fileForSave = new FileHandler();
             fileForSave.WriteHistoriesCallsToFileAsync(_path, CallsHistories);
         }
-
-
-       
-
-
-
-
-
     }
 }

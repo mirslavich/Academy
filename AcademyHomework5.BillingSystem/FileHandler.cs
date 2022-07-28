@@ -19,7 +19,7 @@ namespace AcademyHomework5.BillingSystem
                 foreach (var call in callsList)
                 {
                     var sb = new StringBuilder();
-                    sb.Append(call.FromClient.Agreement + " " + call.FromClient.Tariff.TariffPlans + " " + call.ToPhoneNumber + " " + call.StartDateTime + " " + call.EndDateTime + " $" + call.CostOfCall);
+                    sb.Append(call.FromClient.Agreement + " " + call.FromClient.Tariff.TariffPlans + " " + call.ToPhoneNumber + " " + call.StartDateTime + " " + call.EndDateTime + " " + call.CallDuration);
                     await sw.WriteLineAsync(sb.ToString());
                 }
             }

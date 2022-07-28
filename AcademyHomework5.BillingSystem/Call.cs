@@ -7,6 +7,8 @@
         public DateTime EndDateTime { get;}
         public int ToPhoneNumber { get;}
         public double CostOfCall { get;}
+        public double CallDuration { get;}
+
 
         public Call(Client fromClient, DateTime startDateTime,DateTime endDateTime, int toPhoneNumber, double addSecond)
         {
@@ -15,6 +17,7 @@
             EndDateTime = endDateTime;
             ToPhoneNumber = toPhoneNumber;
             CostOfCall = fromClient.Tariff.PriceOfSecond*addSecond;
+            CallDuration = addSecond;
         }
     }
 }
