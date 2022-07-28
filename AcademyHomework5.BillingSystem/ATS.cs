@@ -10,21 +10,23 @@ namespace AcademyHomework5.BillingSystem
     {
         public List<Client> Clients= new List<Client>() ;
         public List<Call> CallsHistories = new List<Call>();
+        public List<double> PaymentOnceMonth = new List<double>() ;
+        private const string _path = "@historyOfCalls.txt";
 
         public void AddNewClient(string firstName, string secondName, string adress,Tariff tariff)
         {
-            
             var port = new Port();
             port.isActive = true;
             port.PhoneNumber= GetPhoneNumber();
             var phone = new Phone();
             phone.SomePhone=true;
-            phone.ConnectPhoneToPort();
+            phone.PhoneConnectionToPort=true;
             var newClient =new Client(SingAnAgreemeet(),firstName, secondName, GenerateDateOfBirth(), adress,phone, port, tariff );
             Clients.Add(newClient);
             Clients.Last().NotifyCall += Clients.Last().Phone.ConnectionWithSomeone;
-            Clients.Last().Phone.NotificationConnection += TryToConnect;
+            Clients.Last().Phone.NotificationConnection += ConnectClientToClient;
             Clients.Last().Phone.StatusPhoneToPort += StatusPhoneToPort;
+            Clients.Last().NotifyChangeTariff += ChangeTariffForClient;
         }
 
         public int GetPhoneNumber()
@@ -32,11 +34,9 @@ namespace AcademyHomework5.BillingSystem
             var newPhone = new Random().Next(4000000, 4999999);
             return newPhone;
         }
-        private void StatusPhoneToPort(Phone sender, NotificationPhoneConnectionToPortEventArgs eventArgs)
+        private void StatusPhoneToPort(Client sender, NotificationPhoneConnectionToPortEventArgs eventArgs)
         {
-            // need more logical 
-            
-
+            Clients.Find(c => c.Agreement == sender.Agreement).Phone.PhoneConnectionToPort = eventArgs.PhoneConnectionToPort;
         }
 
         private DateTime GenerateDateOfBirth()
@@ -62,13 +62,14 @@ namespace AcademyHomework5.BillingSystem
             return isClient;
         }
 
-        public void TryToConnect(Client sender, NotificationCallEventArgs callEventArgs)
+        public void ConnectClientToClient(Client sender, NotificationCallEventArgs callEventArgs)
         {
             if (CheckClient(callEventArgs.SomePhoneNumber))
             {
-                
-                var endCall= callEventArgs.DateTimeNow.AddSeconds(new Random().Next(1, 3600));
-                CallsHistories.Add(new Call(sender,callEventArgs.DateTimeNow,endCall,callEventArgs.SomePhoneNumber));
+                var addSecond = new Random().Next(2, 3600);
+                var endCall= callEventArgs.DateTimeNow.AddSeconds(addSecond);
+                CallsHistories.Add(new Call(sender,callEventArgs.DateTimeNow,endCall,callEventArgs.SomePhoneNumber, addSecond));
+
             }
             else
             {
@@ -76,9 +77,23 @@ namespace AcademyHomework5.BillingSystem
             }
         }
 
-        public void ChangeTariffForClient(Client client, Tariff newTariff)
-        { 
-            
+        public void ChangeTariffForClient(Client sender, NotificationChangeTariffEventArgs newTariffEventArgs)
+        {
+            if ((sender.Tariff.DateOfConnection.Day - DateTime.Now.Day) > 30)
+            {
+                Clients.Find(c => c.Agreement == sender.Agreement).Tariff = new Tariff(newTariffEventArgs.TariffPlans);
+            }
+            else
+            {
+                Console.WriteLine("You can change the tariff only once a month!");
+            }
+ 
+        }
+
+        public void SaveHistoryCalls()
+        {
+            var fileForSave = new FileHandler();
+            fileForSave.WriteHistoriesCallsToFileAsync(_path, CallsHistories);
         }
 
 

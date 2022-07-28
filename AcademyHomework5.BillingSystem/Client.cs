@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace AcademyHomework5.BillingSystem;
 
 public delegate void NotificationCallHandler(Client sender, NotificationCallEventArgs eventsArgs);
-public delegate void NotificationChangeTariff(Client sender, NotificationChangeTariffEventArgs args);
+public delegate void NotificationChangeTariff(Client sender, NotificationChangeTariffEventArgs eventsArgs);
 
 public class Client
 {
@@ -18,7 +18,7 @@ public class Client
     public string Address { get; }
     public Phone Phone { get; }
     public Port Port { get; }
-    public Tariff Tariff { get; }
+    public Tariff Tariff { get; set; }
 
     public event NotificationCallHandler NotifyCall;
     public event NotificationChangeTariff NotifyChangeTariff;
@@ -39,12 +39,12 @@ public class Client
 
     public void ConnectPhoneToPort()
     {
-        Phone.ConnectPhoneToPort();
+        Phone.ConnectPhoneToPort(this);
     }
 
     public void DisconnectPhoneFromPort()
     {
-        Phone.DisconnectPhoneFromPort();
+        Phone.DisconnectPhoneFromPort(this);
     }
     public void Call(int somePhoneNumber)   // проверка на абонента сети // проверка порта занято/или нет
     {
@@ -56,14 +56,13 @@ public class Client
         {
             Console.WriteLine("Net isn't working!Check please port and phone!");
         }
-        
-
     }
 
     
     
     public void ChangeTariffPlan(TariffPlans newTariff)
     {
+        
         NotifyChangeTariff?.Invoke(this, new NotificationChangeTariffEventArgs(newTariff));
     }
 

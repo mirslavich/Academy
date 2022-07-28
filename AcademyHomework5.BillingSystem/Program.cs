@@ -16,11 +16,6 @@
                 HandlingUserInput(userChoice, isATS);
 
             } while (userChoice!=0);
-            
-
-
-
-
 
         }
         static void HandlingUserInput(int someInput, ATS isATS)
@@ -40,14 +35,34 @@
                     iAmClient.Call(int.Parse(Console.ReadLine()));
                     break;
                 case 3:
-                    foreach (var item in isATS.CallsHistories)
+                    iAmClient = GetСlient(isATS);
+                    Console.WriteLine("\nSort by:\n[1]-Data\n[2]-Cost of call\n[3]-Phone of number");
+                    if ((!int.TryParse(Console.ReadLine(), out int inputUser)) || (inputUser > 3 || inputUser < 1 ))
                     {
-                        Console.WriteLine($"Name: {item.FromClient.FirstName} Called the number: { item.ToPhoneNumber} {item.StartDateTime}");
+                        Console.WriteLine(">>>>Input is wrong");
+                        Console.ReadLine();
+                        ShowSelectionMenu();
+                    }
+                    var sortListCalls = GetSortCalls(isATS,iAmClient, inputUser);
+
+                    foreach (var call in sortListCalls)
+                    {
+                        Console.WriteLine($"Name: {call.FromClient.FirstName} Called the number: {call.ToPhoneNumber} Start: {call.StartDateTime} Cost:{call.CostOfCall}");
                     }
                     break;
                 case 4:
-                    iAmClient = GetСlient(isATS);
-
+                    var randomTariff = new Random();
+                    GetСlient(isATS).ChangeTariffPlan((TariffPlans)randomTariff.Next(3));
+                    break;
+                case 5:
+                    GetСlient(isATS).ConnectPhoneToPort();
+                    break;
+                case 6:
+                    GetСlient(isATS).DisconnectPhoneFromPort();
+                    break;
+                case 7:
+                    isATS.SaveHistoryCalls();
+                    Console.WriteLine("<<< History of calls saved");
                     break;
                 default:
                     break;
@@ -57,9 +72,9 @@
         static int ShowSelectionMenu()
         {
             Console.WriteLine(">>>>>>Welcome");
-            Console.WriteLine("[0]-Exit\n[1]-List phone numbers \n[2]-Call to someone \n[3]-Show histories calls\n[4]-Change tariff plan");
+            Console.WriteLine("[0]-Exit\n[1]-List phone numbers \n[2]-Call to someone \n[3]-Show histories calls\n[4]-Change tariff plan by random\n[5]-Connect phone to port\n[6]-Disconnect phone to port\n[7]-Save histories calls");
             bool isInput = int.TryParse(Console.ReadLine(), out int userChoice);
-            if (!isInput || userChoice > 5 || userChoice < 0)
+            if (!isInput || userChoice > 8 || userChoice < 0)
             {
                 Console.WriteLine(">>>>Input is wrong");
                 Console.ReadLine();
@@ -73,7 +88,7 @@
             Console.WriteLine("Please select the client you are ");
             Console.WriteLine($"[1] -{isATS.Clients[0].FirstName}\n[2] -{ isATS.Clients[1].FirstName}\n[3] -{isATS.Clients[2].FirstName}\n");
             bool isInput = int.TryParse(Console.ReadLine(), out int userChoice);
-            if (!isInput || userChoice > 4 || userChoice < 0)
+            if (!isInput && (userChoice > 4 || userChoice < 0))
             {
                 Console.WriteLine(">>>>Input is wrong");
                 Console.ReadLine();
@@ -82,5 +97,28 @@
             var iAmClient = isATS.Clients[userChoice - 1];
             return iAmClient;
         }
+
+        static List<Call> GetSortCalls(ATS isATS,Client client,int inputUser)
+        {
+            List<Call> sortCallsList = new List<Call>();
+
+            switch (inputUser)
+            {
+                case 1:
+                    sortCallsList= isATS.CallsHistories.FindAll(c => c.FromClient == client).OrderBy(cl=>cl.StartDateTime).ToList();
+                    return sortCallsList;
+                case 2:
+                    sortCallsList = isATS.CallsHistories.FindAll(c => c.FromClient == client).OrderBy(cl => cl.CostOfCall).ToList();
+                    return sortCallsList;
+                case 3:
+                    sortCallsList = isATS.CallsHistories.FindAll(c => c.FromClient == client).OrderBy(cl => cl.ToPhoneNumber).ToList();
+                    return sortCallsList;
+                default:
+                    Console.WriteLine("Input is wrong");
+                    break;
+            }
+            return sortCallsList;
+        }
+       
     }
 }
